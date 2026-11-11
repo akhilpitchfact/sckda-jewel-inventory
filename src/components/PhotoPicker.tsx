@@ -1,6 +1,7 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useI18n } from '../i18n';
 import { Icon } from './ui';
+import { CameraCapture, canUseWebcam, prefersNativeCamera } from './CameraCapture';
 
 export interface LocalPhoto { key: string; blob: Blob; url: string }
 
@@ -9,6 +10,12 @@ export function PhotoPicker({ photos, onAdd, onRemove }: { photos: LocalPhoto[];
   const { t } = useI18n();
   const cam = useRef<HTMLInputElement>(null);
   const gal = useRef<HTMLInputElement>(null);
+  const [webcam, setWebcam] = useState(false);
+  const openCamera = () => {
+    // Phones/tablets: their own camera app via <input capture>. Desktops: in-app webcam view.
+    if (!prefersNativeCamera() && canUseWebcam()) setWebcam(true);
+    else cam.current?.click();
+  };
   const pick = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     if (files.length) onAdd(files);
@@ -17,7 +24,7 @@ export function PhotoPicker({ photos, onAdd, onRemove }: { photos: LocalPhoto[];
   return (
     <div>
       <div className="grid grid-cols-2 gap-3">
-        <button type="button" onClick={() => cam.current?.click()}
+        <button type="button" onClick={openCamera}
           className="group flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-gold-400 bg-gold-100/40 px-4 py-6 text-maroon-800 transition hover:bg-gold-100">
           <span className="grid place-items-center w-12 h-12 rounded-full metal-gold shadow group-hover:scale-105 transition"><Icon name="camera" className="w-6 h-6" /></span>
           <span className="font-semibold">{t('takePhoto', 'Take photo')}</span>
@@ -30,6 +37,7 @@ export function PhotoPicker({ photos, onAdd, onRemove }: { photos: LocalPhoto[];
       </div>
       <input ref={cam} type="file" accept="image/*" capture="environment" className="hidden" onChange={pick} />
       <input ref={gal} type="file" accept="image/jpeg,image/png,image/webp" multiple className="hidden" onChange={pick} />
+      <CameraCapture open={webcam} onClose={() => setWebcam(false)} onCapture={(f) => onAdd([f])} onFallback={() => gal.current?.click()} />
       {photos.length > 0 && (
         <div className="mt-4 grid grid-cols-3 tablet:grid-cols-4 gap-3">
           {photos.map((p) => (

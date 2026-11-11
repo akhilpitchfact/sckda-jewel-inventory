@@ -1,0 +1,42 @@
+{
+  "name": "sckda-jewel-inventory",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "COOKIE_SECURE=false PORT=8080 node --no-warnings --watch server/index.mjs",
+    "dev:web": "vite",
+    "build": "node scripts/check-env.cjs && tsc -b && vite build",
+    "start": "node --no-warnings server/index.mjs",
+    "backup": "node --no-warnings scripts/backup.mjs"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "exceljs": "4.4.0",
+    "express": "^4.21.2",
+    "jspdf": "2.5.2",
+    "jspdf-autotable": "3.8.4",
+    "multer": "^1.4.5-lts.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.12",
+    "@types/node": "22.10.2",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@vitejs/plugin-react": "4.3.4",
+    "autoprefixer": "10.4.21",
+    "concurrently": "^9.1.0",
+    "postcss": "8.5.6",
+    "tailwindcss": "3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "5.5.4",
+    "vite": "5.4.19",
+    "vite-plugin-pwa": "0.20.5"
+  }
+}

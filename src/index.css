@@ -1,0 +1,79 @@
+/* src/index.css — Tailwind + self-hosted Noto Sans Kannada (same font files as the Hundi app). */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face { font-family: 'Noto Sans Kannada'; font-weight: 400; font-display: swap; src: url('/fonts/NotoSansKannada-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'Noto Sans Kannada'; font-weight: 500; font-display: swap; src: url('/fonts/NotoSansKannada-Medium.ttf') format('truetype'); }
+@font-face { font-family: 'Noto Sans Kannada'; font-weight: 600 800; font-display: swap; src: url('/fonts/NotoSansKannada-Bold.ttf') format('truetype'); }
+
+@layer base {
+  html { font-family: 'Noto Sans Kannada', 'Inter', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-cream-50 text-charcoal antialiased; min-height: 100dvh; }
+  input, select, textarea { font-family: inherit; font-size: 16px; }
+  :focus-visible { outline: 3px solid #dcae3f; outline-offset: 2px; }
+  .tabular { font-variant-numeric: tabular-nums; }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-semibold transition
+         active:scale-[.98] disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] select-none; }
+  .btn-primary { @apply btn text-white shadow-md; background: linear-gradient(135deg, #8e2328, #5a1519); }
+  .btn-primary:hover { background: linear-gradient(135deg, #9f2a30, #6b191d); }
+  .btn-gold { @apply btn text-maroon-950 shadow-md; background: linear-gradient(135deg, #f5e1a4 0%, #dcae3f 45%, #a8791c 100%); }
+  .btn-gold:hover { filter: brightness(1.05); }
+  .btn-ghost { @apply btn border border-cream-300 bg-white text-charcoal hover:bg-cream-100; }
+  .btn-danger { @apply btn bg-red-700 text-white hover:bg-red-800; }
+  .btn-sm { @apply min-h-[38px] px-3 py-1.5 text-sm rounded-lg; }
+
+  .card { @apply rounded-2xl bg-white border border-cream-200 shadow-soft; }
+  .input { @apply w-full rounded-xl border border-cream-300 bg-white px-4 py-3 text-charcoal placeholder-gray-400
+           transition focus:border-gold-500 focus:ring-4 focus:ring-gold-200/60 focus:outline-none min-h-[48px]; }
+  .label { @apply mb-1.5 block text-sm font-semibold text-charcoal/80; }
+  .hint { @apply mt-1 text-xs text-charcoal/50; }
+  .chip { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap; }
+  .section-title { @apply text-lg font-bold text-maroon-800; }
+
+  /* Metallic surfaces for the wow factor */
+  .metal-gold {
+    background:
+      radial-gradient(120% 140% at 0% 0%, rgba(255,247,214,.95) 0%, rgba(255,247,214,0) 45%),
+      linear-gradient(135deg, #f7e7b0 0%, #e2bb55 28%, #c8962a 52%, #edd28a 72%, #a8791c 100%);
+  }
+  .metal-silver {
+    background:
+      radial-gradient(120% 140% at 0% 0%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 45%),
+      linear-gradient(135deg, #fbfcfd 0%, #d5dbe1 28%, #a4aeb8 52%, #e9edf0 72%, #7f8a96 100%);
+  }
+  .temple-bg {
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(220,174,63,.25), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(232,163,61,.18), transparent 60%),
+      linear-gradient(160deg, #3a0b0e 0%, #5a1519 45%, #2a080a 100%);
+  }
+  .gold-text {
+    background: linear-gradient(180deg, #fff3c4 0%, #ecc96a 45%, #c8962a 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sheen { position: relative; overflow: hidden; }
+  .sheen::after {
+    content: ''; position: absolute; inset: -20% auto -20% 0; width: 35%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+    animation: sheen 4.5s ease-in-out infinite; pointer-events: none;
+  }
+  .table-x { @apply w-full text-sm; }
+  .table-x th { @apply bg-cream-100 text-left text-xs font-bold uppercase tracking-wide text-charcoal/60 px-3 py-2.5 whitespace-nowrap; }
+  .table-x td { @apply border-t border-cream-200 px-3 py-2.5 align-top; }
+  .table-x tr:hover td { @apply bg-cream-50; }
+}
+
+@keyframes sheen { 0% { transform: translateX(-120%) skewX(-20deg); } 60%, 100% { transform: translateX(320%) skewX(-20deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .sheen::after, .animate-sheen, .animate-spin-slower, .animate-glint { animation: none !important; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth';
+import { IS_DEMO, loadDemo } from '../api';
 import { useI18n } from '../i18n';
 import { Icon, Mandala, ROLE_LABEL } from './ui';
 
@@ -114,6 +115,13 @@ export default function Shell({ children }: { children: ReactNode }) {
         </div>
       )}
 
+      {IS_DEMO && (
+        <div className="no-print flex flex-wrap items-center justify-center gap-x-3 gap-y-1 bg-gold-200 px-4 py-1.5 text-center text-xs font-semibold text-maroon-900">
+          <span>Demo with sample data. Nothing here is real, and changes stay in this browser.</span>
+          <button type="button" className="underline underline-offset-2 hover:text-maroon-700"
+            onClick={async () => { await (await loadDemo()).resetDemo(); window.location.href = '/'; }}>Reset demo</button>
+        </div>
+      )}
       <main className="mx-auto max-w-7xl px-4 py-6 tablet:px-6 lg:px-10 lg:py-10 pb-28 lg:pb-10">{children}</main>
 
       {/* Mobile bottom bar: the most used actions */}

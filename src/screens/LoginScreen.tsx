@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { api } from '../api';
+import { api, IS_DEMO } from '../api';
 import { useAuth } from '../auth';
 import { useI18n } from '../i18n';
 import { ErrorBox, Mandala, Spinner } from '../components/ui';
@@ -12,12 +12,12 @@ export default function LoginScreen() {
   const [err, setErr] = useState('');
   const [busy, setBusy] = useState(false);
 
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
+  const submit = async (e: FormEvent | null, as?: string) => {
+    e?.preventDefault();
     setErr('');
     setBusy(true);
     try {
-      await api.post('/auth/login', { username, password });
+      await api.post('/auth/login', as ? { username: as, password: DEMO_PW } : { username, password });
       await refresh();
     } catch (e2) {
       setErr((e2 as Error).message);
@@ -86,8 +86,30 @@ export default function LoginScreen() {
           </div>
         </form>
 
+        {IS_DEMO && (
+          <div className="mt-6 w-full max-w-sm rounded-3xl bg-black/25 p-5 ring-1 ring-gold-300/20 animate-rise" style={{ animationDelay: '.24s' }}>
+            <div className="text-sm font-bold text-gold-200">Demo with sample data</div>
+            <div className="mt-0.5 text-xs text-white/60">Tap a role to sign in as that officer. Every demo login uses the password <b className="text-white/80">{DEMO_PW}</b>.</div>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              {DEMO_USERS.map(([u, role]) => (
+                <button key={u} type="button" disabled={busy} onClick={() => submit(null, u)}
+                  className="rounded-xl bg-white/5 px-3 py-2 text-left ring-1 ring-white/10 transition hover:bg-white/10 hover:ring-gold-300/40">
+                  <div className="text-[13px] font-semibold text-white">{role}</div>
+                  <div className="font-mono text-[11px] text-gold-200/70">{u}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="mt-10 text-[11px] text-white/40">Developed by Pitchfact Digital Technologies</div>
       </div>
     </div>
   );
 }
+
+const DEMO_PW = 'Demo@1234';
+const DEMO_USERS: [string, string][] = [
+  ['superadmin', 'Secretary (Super Admin)'], ['ravi', 'Inventory Officer'], ['manjunath', 'Verification Officer'],
+  ['lakshmi', 'Inventory Officer'], ['shobha', 'Accounts Officer'], ['authority', 'Management'],
+];

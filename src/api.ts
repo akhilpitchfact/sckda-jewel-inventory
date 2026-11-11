@@ -3,9 +3,14 @@ export class ApiError extends Error {
   constructor(message: string, public status: number, public code?: string) { super(message); }
 }
 
+// Netlify demo build (VITE_DEMO=1): every call is answered by an in-browser mock with sample data.
+export const IS_DEMO = import.meta.env.VITE_DEMO === '1';
+let demo: typeof import('./demo/mockServer') | null = null;
+export const loadDemo = async () => (demo ??= await import('./demo/mockServer'));
+
 async function request<T>(method: string, url: string, body?: unknown): Promise<T> {
   const isForm = body instanceof FormData;
-  const res = await fetch(`/api${url}`, {
+  const res = IS_DEMO ? await demoFetch(method, url, body) : await fetch(`/api${url}`, {
     method,
     credentials: 'same-origin',
     headers: {
@@ -14,7 +19,7 @@ async function request<T>(method: string, url: string, body?: unknown): Promise<
     },
     body: body ? (isForm ? body : JSON.stringify(body)) : undefined,
   });
-  const data = await res.json().catch(() => ({}));
+  const data = 'data' in res ? res.data : await res.json().catch(() => ({}));
   if (!res.ok) {
     if (res.status === 401 && !url.startsWith('/auth/')) window.dispatchEvent(new Event('sckda:logged-out'));
     if (data?.code === 'MUST_CHANGE_PASSWORD') window.dispatchEvent(new Event('sckda:must-change-password'));
@@ -38,4 +43,8 @@ export const qs = (o: Record<string, string | number | undefined | null | boolea
   return s ? `?${s}` : '';
 };
 
-export const photoUrl = (id: number) => `/api/photos/${id}`;
+export const photoUrl = (id: number) => (IS_DEMO ? demo?.demoPhotoSrc(id) || '' : `/api/photos/${id}`);
+
+async function demoFetch(method: string, url: string, body?: unknown) {
+  return (await loadDemo()).demoRequest(method, url, body);
+}

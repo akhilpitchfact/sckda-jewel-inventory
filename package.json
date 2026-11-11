@@ -9,7 +9,8 @@
     "dev:web": "vite",
     "build": "node scripts/check-env.cjs && tsc -b && vite build",
     "start": "node --no-warnings server/index.mjs",
-    "backup": "node --no-warnings scripts/backup.mjs"
+    "backup": "node --no-warnings scripts/backup.mjs",
+    "build:demo": "tsc -b && vite build --mode demo"
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",

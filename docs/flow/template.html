@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Register Article Flow - SCKDA</title>
+<style>
+@font-face { font-family: 'Noto Sans Kannada'; font-weight: 400; src: url('NotoSansKannada-Regular.ttf'); }
+@font-face { font-family: 'Noto Sans Kannada'; font-weight: 500; src: url('NotoSansKannada-Medium.ttf'); }
+@font-face { font-family: 'Noto Sans Kannada'; font-weight: 700; src: url('NotoSansKannada-Bold.ttf'); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Noto Sans Kannada', sans-serif; color: #2B2B2B; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; }
+.page:last-child { page-break-after: auto; }
+.head { background: linear-gradient(120deg, #2a080a, #5a1519 55%, #6b191d); color: #fff; padding: 7mm 12mm 6mm; display: flex; gap: 5mm; align-items: center; border-bottom: 1.2mm solid #dcae3f; }
+.head img { width: 20mm; height: 20mm; border-radius: 50%; background: #fff; padding: .6mm; box-shadow: 0 0 0 .7mm #ecc96a; }
+.org-kn { font-size: 10.5pt; color: #f5e1a4; }
+.org-en { font-size: 8.5pt; color: rgba(255,255,255,.75); }
+.title { font-size: 17pt; font-weight: 700; color: #ecc96a; line-height: 1.35; margin-top: 1mm; }
+.title small { font-size: 11pt; font-weight: 500; color: #f5e1a4; margin-left: 2mm; }
+.body { flex: 1; padding: 4.5mm 12mm 0; min-height: 0; }
+.chart { display: flex; justify-content: center; }
+.chart svg { height: 232mm; width: auto; }
+svg .lt { font: 700 17px 'Noto Sans Kannada'; fill: #ecc96a; }
+svg .lk { font: 500 13px 'Noto Sans Kannada'; fill: #fbf1d3; }
+svg .bt { font: 700 16px 'Noto Sans Kannada'; }
+svg .bl { font: 400 13px 'Noto Sans Kannada'; fill: #2B2B2B; }
+svg .al { font: 500 13px 'Noto Sans Kannada'; }
+svg .pill { font: 700 12px 'Noto Sans Kannada'; }
+.foot { padding: 3mm 12mm 6mm; display: flex; justify-content: space-between; font-size: 7.5pt; color: #7d5913; border-top: .3mm solid #ede5d4; margin: 0 12mm; padding-left: 0; padding-right: 0; }
+h2 { font-size: 12.5pt; color: #5a1519; margin: 0 0 2.5mm; display: flex; align-items: baseline; gap: 2mm; }
+h2 span { font-size: 9.5pt; font-weight: 500; color: #a8791c; }
+section { margin-bottom: 4.5mm; }
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.6mm; counter-reset: s; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 8mm 1fr; gap: 3mm; font-size: 8.8pt; line-height: 1.42; }
+ol.steps li::before { content: counter(s); width: 7mm; height: 7mm; border-radius: 50%; background: #5a1519; color: #ecc96a; font-weight: 700; font-size: 9pt; display: grid; place-items: center; }
+ol.steps b { color: #5a1519; }
+.who { font-size: 8pt; color: #a8791c; font-weight: 500; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+ul.rules { margin: 0; padding: 0; list-style: none; display: grid; gap: 1.3mm; font-size: 8.6pt; line-height: 1.38; }
+ul.rules li { padding-left: 5mm; position: relative; }
+ul.rules li::before { content: ''; position: absolute; left: 0; top: 1.6mm; width: 2.2mm; height: 2.2mm; transform: rotate(45deg); background: #dcae3f; }
+table { width: 100%; border-collapse: collapse; font-size: 8.6pt; }
+th { text-align: left; background: #5a1519; color: #ecc96a; padding: 1.8mm 2.5mm; font-weight: 700; }
+td { padding: 1.2mm 2.5mm; border-bottom: .3mm solid #ede5d4; vertical-align: top; line-height: 1.4; }
+tr:nth-child(even) td { background: #fdfbf7; }
+.status { display: flex; gap: 3mm; flex-wrap: wrap; font-size: 8.6pt; }
+.st { border-radius: 99px; padding: .8mm 3mm; font-weight: 700; }
+.idbox { margin-top: 3mm; display: flex; gap: 4mm; font-size: 8.6pt; }
+.idbox div { flex: 1; border-radius: 2.5mm; padding: 1.8mm 3mm; }
+.mono { font-family: 'DejaVu Sans Mono', monospace; font-weight: 700; }
+</style></head><body>
+
+<div class="page">
+  <div class="head">
+    <img src="logo-sckda.png" alt="SCKDA">
+    <div>
+      <div class="org-kn">ಶ್ರೀ ಚಾಮುಂಡೇಶ್ವರಿ ಕ್ಷೇತ್ರ ಅಭಿವೃದ್ಧಿ ಪ್ರಾಧಿಕಾರ</div>
+      <div class="org-en">Sri Chamundeshwari Kshetra Development Authority, Mysuru · Gold &amp; Silver Articles Accounting &amp; Inventory</div>
+      <div class="title">How an article is registered <small>ವಸ್ತು ನೋಂದಣಿ ಪ್ರಕ್ರಿಯೆ</small></div>
+    </div>
+  </div>
+  <div class="body"><div class="chart">%%SVG%%</div></div>
+  <div class="foot"><span>Every step is recorded in the audit trail with who, what and when. Audit entries cannot be edited or deleted.</span><span>Page 1 of 2</span></div>
+</div>
+
+<div class="page">
+  <div class="head">
+    <img src="logo-sckda.png" alt="SCKDA">
+    <div>
+      <div class="org-kn">ಶ್ರೀ ಚಾಮುಂಡೇಶ್ವರಿ ಕ್ಷೇತ್ರ ಅಭಿವೃದ್ಧಿ ಪ್ರಾಧಿಕಾರ</div>
+      <div class="org-en">Sri Chamundeshwari Kshetra Development Authority, Mysuru · Gold &amp; Silver Articles Accounting &amp; Inventory</div>
+      <div class="title">Step by step <small>ಹಂತ ಹಂತವಾಗಿ</small></div>
+    </div>
+  </div>
+  <div class="body">
+    <section>
+      <ol class="steps">
+        <li><div><b>Article received.</b> A gold or silver article comes in from a Hundi counting or as a Seva offering, and is weighed. <span class="who">Inventory Officer</span></div></li>
+        <li><div><b>Open "Register Article"</b> on a phone, tablet or computer and fill in six sections: receipt (date and time, Hundi or Seva, Hundi batch or Seva receipt number), donor (optional for Hundi), the article (gold or silver, category, type, description, number of pieces), weight and purity (gross and net weight to the milligram, purity, who weighed it, and the weight of each piece if there are several), photographs (camera or upload), and remarks. <span class="who">Inventory Officer</span></div></li>
+        <li><div><b>Save.</b> The application checks every required field. It then creates the Article ID automatically, records the entry as <b>Pending verification</b>, and writes an audit entry. <span class="who">Application</span></div></li>
+        <li><div><b>Verify.</b> A Verification Officer who did not enter the record opens it from the queue, checks the physical article, and ticks all six checks: description, photograph, quantity, weight on the scale, source of receipt, and donor details. Purity can be confirmed here. <span class="who">Verification Officer</span></div></li>
+        <li><div><b>Approve or return.</b> If everything matches, the officer approves it. The record is locked and counts in the gold and silver totals, the dashboard and all 12 reports. If something is wrong, the officer returns it with written remarks. <span class="who">Verification Officer</span></div></li>
+        <li><div><b>Correct and resubmit.</b> A returned entry appears on the Inventory Officer's dashboard with the remarks. After correction it goes back to Pending verification, and step 4 repeats. <span class="who">Inventory Officer</span></div></li>
+        <li><div><b>Later corrections.</b> An approved record can only be amended or cancelled by the Secretary (Super Admin), with a written reason. The old and new values are both kept. Nothing is ever deleted. <span class="who">Secretary</span></div></li>
+      </ol>
+      <div class="idbox">
+        <div style="background:#fbf1d3"><div class="who">Gold Article ID</div><div class="mono" style="color:#7d5913;font-size:11pt">AU-2026-00042</div></div>
+        <div style="background:#e3e7eb"><div class="who" style="color:#454d56">Silver Article ID</div><div class="mono" style="color:#454d56;font-size:11pt">AG-2026-00017</div></div>
+        <div style="background:#fdfbf7;border:.3mm solid #ede5d4"><div class="who">Format</div><div style="font-size:8.6pt">metal · year · running number, one series per metal per year</div></div>
+      </div>
+    </section>
+
+    <div class="grid2">
+      <section>
+        <h2>Safeguards <span>ಸುರಕ್ಷತಾ ನಿಯಮಗಳು</span></h2>
+        <ul class="rules">
+          <li>The person who enters or edits a record can never verify it.</li>
+          <li>Approval needs all six checks ticked.</li>
+          <li>Approved records are locked. Only the Secretary can amend them, with a reason.</li>
+          <li>Records are cancelled with a reason, never deleted.</li>
+          <li>The audit trail cannot be edited or deleted, even by the Secretary.</li>
+          <li>Each officer has their own login. Accounts lock for 15 minutes after 5 wrong passwords.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Status of an entry <span>ಸ್ಥಿತಿ</span></h2>
+        <div class="status">
+          <span class="st" style="background:#fde9b8;color:#7a4a00">Pending verification</span>
+          <span class="st" style="background:#fdecec;color:#b42318">Returned for correction</span>
+          <span class="st" style="background:#c9ecd8;color:#067647">Approved</span>
+          <span class="st" style="background:#e3e7eb;color:#454d56">Cancelled</span>
+        </div>
+        <p style="font-size:8.6pt;line-height:1.45;margin:3mm 0 0">Reports can show approved entries only, or every entry including pending ones.</p>
+      </section>
+    </div>
+
+    <section>
+      <h2>Who does what <span>ಯಾರು ಏನು ಮಾಡುತ್ತಾರೆ</span></h2>
+      <table>
+        <tr><th style="width:32%">Role</th><th>Can do</th></tr>
+        <tr><td><b>Secretary (Super Admin)</b>&nbsp; <span class="who">ಕಾರ್ಯದರ್ಶಿ</span></td><td>Everything below, plus managing officers and categories, and amending or cancelling approved records</td></tr>
+        <tr><td><b>Inventory Officer</b>&nbsp; <span class="who">ದಾಸ್ತಾನು ಅಧಿಕಾರಿ</span></td><td>Registers articles, adds photographs, corrects returned entries</td></tr>
+        <tr><td><b>Verification Officer</b>&nbsp; <span class="who">ಪರಿಶೀಲನಾ ಅಧಿಕಾರಿ</span></td><td>Verifies, approves or returns entries; views reports</td></tr>
+        <tr><td><b>Accounts Officer</b>&nbsp; <span class="who">ಲೆಕ್ಕ ಅಧಿಕಾರಿ</span></td><td>Views reports, donor details and the audit trail</td></tr>
+        <tr><td><b>Management / Authority</b>&nbsp; <span class="who">ಆಡಳಿತ / ಪ್ರಾಧಿಕಾರ</span></td><td>Views the dashboard, reports and audit trail (donor details hidden)</td></tr>
+      </table>
+    </section>
+  </div>
+  <div class="foot"><span>Prepared by Pitchfact Digital Technologies for SCKDA · November 2026</span><span>Page 2 of 2</span></div>
+</div>
+</body></html>
